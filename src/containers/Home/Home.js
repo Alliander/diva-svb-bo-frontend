@@ -81,7 +81,6 @@ export default class Home extends React.Component {
 
     return (
       <div style={{ padding: '20px' }}>
-        <h2>Openstaande verzoeken</h2>
         <Table>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>

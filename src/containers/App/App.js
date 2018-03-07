@@ -13,7 +13,9 @@ import './App.css';
 const styles = {
   main: {
     minHeight: 200,
-    margin: 20,
+    margin: '40px',
+    padding: '20px',
+    backgroundColor: 'white',
   },
 };
 
@@ -27,11 +29,15 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <Grid fluid>
+          <Grid fluid style={{ padding: 0 }}>
             <Row>
-              <Col xs>
-                <img style={{float: "left"}} style={{width: "125px", marginTop: "20px"}} alt="SVB" src="/svb-logo.jpg"/>
-                <h2 style={{float: "left"}}>SVB Huishoudboekje</h2>
+              <Col xs style={{ textAlign: 'center', margin: '20px'}}>
+                <img alt="BSN" src="/svb-logo.jpg" style={{ width: '240px' }}/>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs style={{ backgroundColor: "black", color: 'white', padding: '5px', paddingLeft: '50px'}}>
+                <h2>Dashboard SFTP openstaande verzoeken huishoudboekje</h2>
               </Col>
             </Row>
             <Row>
