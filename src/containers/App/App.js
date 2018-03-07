@@ -27,8 +27,13 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <AppBar title="Ketenpartner dashboard"/>
           <Grid fluid>
+            <Row>
+              <Col xs>
+                <img style={{float: "left"}} style={{width: "125px", marginTop: "20px"}} alt="SVB" src="/svb-logo.jpg"/>
+                <h2 style={{float: "left"}}>SVB Huishoudboekje</h2>
+              </Col>
+            </Row>
             <Row>
               <Col xs>
                 <Paper style={styles.main} id="main-content">

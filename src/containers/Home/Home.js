@@ -32,18 +32,34 @@ export default class Home extends React.Component {
       });
   }
 
-  renderRow(row, index) {
-    const buttons = [
-      <RaisedButton key="yes" label="Accepteren" primary={true} />,
-      <RaisedButton key="no" label="Weigeren" secondary={true} style={{marginLeft: "20px"}} />
-    ];
+  reply(row, status) {
+    row.processed = true;
+    row.status = status ? "confirmed" : "declined"
 
+    const reply = {
+      company: "SVB",
+      reference: row.bsn,
+      status: row.status,
+    };
+    axios
+      .post("/api/huishoudboekje/incheck/update", reply)
+      .then(ret => console.log(ret));
+
+    this.setState({
+      tablecontents: this.state.tablecontents,
+    });
+  }
+
+  renderRow(row, index) {
     return (
       <TableRow key={index} selectable={false}>
         <TableRowColumn>{row.initials}</TableRowColumn>
         <TableRowColumn>{row.name}</TableRowColumn>
         <TableRowColumn>{row.bsn}</TableRowColumn>
-        <TableRowColumn style={this.buttonColumnStyle}>{row.processed ? "Verwerkt" : buttons }</TableRowColumn>
+        <TableRowColumn style={this.buttonColumnStyle}>
+          <RaisedButton label="Accepteren" disabled={row.processed} primary={true} onClick={() => this.reply(row, true)} />
+          <RaisedButton label="Weigeren" disabled={row.processed} secondary={true} onClick={() => this.reply(row, false)} style={{marginLeft: "20px"}} />
+        </TableRowColumn>
         <TableRowColumn>{row.valid ? <IconActionCheckCircle color={green500}/> : <IconAlertError/>}</TableRowColumn>
         <TableRowColumn>
           <RaisedButton label="Download" primary={true} onClick={() => this.download(row.bsn)} />
@@ -65,7 +81,7 @@ export default class Home extends React.Component {
 
     return (
       <div style={{ padding: '20px' }}>
-        <h2>Huishoudboekje verzoeken</h2>
+        <h2>Openstaande verzoeken</h2>
         <Table>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
